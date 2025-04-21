@@ -217,9 +217,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       </section>
-      <section className="text-right font-semibold text-gray-500">
-        <a href="#" className="text-purple-600 hover:underline">Waste recyclables are materials that can be processed and reused to create new products</a> with <a class="text-teal-400 hover:underline">Urban Trash</a> by Mizbaul haQ
-      </section>
+      
     </div>
   </div>
 </div>

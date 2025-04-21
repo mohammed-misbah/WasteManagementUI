@@ -21,25 +21,26 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.facebook.com/urbantrash.in"
                 className="text-teal-400 hover:text-teal-300 transition-colors duration-300 transform hover:scale-110 animate-pulse-slow"
               >
                 <FaFacebook size={24} />
               </a>
               <a
-                href="#"
+                href="https://twitter.com/urbantrash"
                 className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 transform hover:scale-110 animate-pulse-slow"
               >
                 <FaTwitter size={24} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/urbantrash.in"
                 className="text-purple-400 hover:text-purple-300 transition-colors duration-300 transform hover:scale-110 animate-pulse-slow"
               >
                 <FaInstagram size={24} />
               </a>
               <a
-                href="#"
+                href="https://wa.me/918900778055"
+                target="_blank"
                 className="text-green-400 hover:text-green-300 transition-colors duration-300 transform hover:scale-110 animate-pulse-slow"
               >
                 <FaWhatsapp size={24} />

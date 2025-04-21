@@ -103,7 +103,6 @@ const AdminLogin = () => {
                                         <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
                                       </div>
                                   </div>
-                                  <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Forgot password?</a>
                               </div>
                               <button type="submit" class="w-full text-white bg-blue-900 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-3 text-center">
                                 Sign in</button>

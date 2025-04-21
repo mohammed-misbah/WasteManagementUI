@@ -257,7 +257,6 @@ const isValidEmail = (email) => {
                   <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
                 </div>
               </div>
-              <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Forgot password?</a>
             </div>
             <button
               type="submit"
