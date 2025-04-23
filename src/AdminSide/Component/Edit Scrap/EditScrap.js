@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useCallback, useEffect, useState} from 'react'
 import axios from '../../../utils/axios'
 import Swal from "sweetalert2";
 import { useParams, useNavigate } from "react-router-dom";
@@ -15,11 +15,7 @@ const EditScrap = () => {
     const [category, setCategory] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchScrap();
-    },[]);
-
-    const fetchScrap = () => {
+    const fetchScrap = useCallback(() => {
         axios.get(`/adminapi/scrapwastedit/${id}/`)
         .then((response) => {
             setScrapWaste(response.data);
@@ -34,8 +30,11 @@ const EditScrap = () => {
         .catch((error) => {
             console.error("Error fetching Scrap Waste",error)
         });
-    };
+    }, [id]);
     console.log("fetch scraaaaaap",id);
+    useEffect(() => {
+      fetchScrap();
+      },[fetchScrap]);
 
     const updateScrap = () => {
         const updatedScrap = {

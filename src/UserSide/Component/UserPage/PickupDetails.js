@@ -1,5 +1,5 @@
 
-import React,{ useState,useEffect } from 'react'
+import React,{ useState,useEffect, useCallback } from 'react'
 // import Table from 'react-bootstrap/Table';
 import axios from '../../../utils/axios'
 // import Footer from './Footer/Footer';
@@ -13,12 +13,7 @@ const Pickupdetails = () => {
   console.log(user,"uuuuuser enteeeeeeeered..!!");
 
 
-  useEffect(() => {
-    fetchWasteBookingdetails();
-    fetchScrapBookingdetails();  
-  },[user]);
-
-  const fetchWasteBookingdetails = () => {  
+  const fetchWasteBookingdetails = useCallback(() => {  
     const id = user?.id
     axios
     .get(`/api/pickup_detail/${id}`)
@@ -30,12 +25,12 @@ const Pickupdetails = () => {
     .catch(error =>{
       console.error('Error fetching Waste Booking data',error)
     });
-  };  
+  },[user?.id]);  
   console.log(wastebookings,"waaaaste booooooooking details")
-
+  
               // Scrap Booking details //
 
-  const fetchScrapBookingdetails = () => {
+  const fetchScrapBookingdetails = useCallback(() => {
     const id = user?.id
     axios 
     .get(`/api/scrappickup_detail/${id}/`)
@@ -47,10 +42,13 @@ const Pickupdetails = () => {
     .catch(error =>{
       console.error('Error fetching Scrap Booking data',error)
     });
-  };
+  },[user?.id]);
   console.log(scrapbookings, "Scraaaaaap booooooooking deeeetails")
 
-
+  useEffect(() => {
+    fetchWasteBookingdetails();
+    fetchScrapBookingdetails();  
+  },[user, fetchWasteBookingdetails, fetchScrapBookingdetails]);
 
     return (
       <div className="container mx-auto px-4 py-8 mt-10">

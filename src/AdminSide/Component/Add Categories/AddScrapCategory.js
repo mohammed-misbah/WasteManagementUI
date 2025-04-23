@@ -3,8 +3,7 @@ import axios from '../../../utils/axios'
 import Swal from "sweetalert2";
 
 const AddScrapCategory = () => {
-    const [showForm,setShowForm] = useState(false)
-    const [categories, setCategories] = useState([]);
+    const [setCategories] = useState([]);
     const [formData, setFormData] = useState({
       name: '',
       description: '',

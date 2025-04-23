@@ -1,12 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import axios from '../../../utils/axios'
-import { useNavigate } from 'react-router-dom';
 import { baseUrl } from '../../../utils/constants';
 
 const WastePriceList = () => {
     const [wastes, setWastes] = useState('')
 
-    const navigate = useNavigate('');
     useEffect (() => {
         fetchBioWaste();
     },[]);

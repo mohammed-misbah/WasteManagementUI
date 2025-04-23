@@ -66,7 +66,7 @@ const WasteCategory = () => {
                 <tr key={category.id}>
                   <td className="py-8 px-20">{category.id}</td>
                   <td className="py-8 px-20">
-                    {category.image && <img src={category.image} alt="image" className="w-16 h-16 object-cover rounded" />}
+                    {category.image && <img src={category.image} alt="" className="w-16 h-16 object-cover rounded" />}
                   </td>
                   <td className="py-8 px-20">{category.name}</td>
                   <td className="py-8 px-20">{category.description}</td>

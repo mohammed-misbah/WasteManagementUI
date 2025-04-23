@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import axios from '../../../../utils/axios'
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,11 +11,7 @@ const WastePickupUpdate = () => {
     const [status, setStatus] = useState("");
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchPickup();
-    }, []);
-
-    const fetchPickup = () => {
+    const fetchPickup = useCallback(() => {
         axios.get(`/api/pickup_update/${id}/`)
         .then((response) => {
             setPickup(response.data);
@@ -26,9 +22,12 @@ const WastePickupUpdate = () => {
         .catch((error) => {
             console.error('Error fetching order',error)
         });
-    };
+    }, [id]);
     console.log("Pickup deeeetails");
 
+    useEffect(() => {
+      fetchPickup();
+  }, [fetchPickup]);
 
     const updatePickup = () => {
         const updatedPickup ={

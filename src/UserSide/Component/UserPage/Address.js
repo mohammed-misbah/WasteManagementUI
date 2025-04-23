@@ -1,10 +1,8 @@
-import React,{useEffect, useState} from 'react'
-import Footer from '../Footer/Footer'
+import React,{useCallback, useEffect, useState} from 'react'
 import axios from '../../../utils/axios';
 // import { addressList } from '../../../utils/constants';
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
-import Sidebar from './Sidebar/Sidebar';
 
 
 const Address = () => {
@@ -17,11 +15,8 @@ const Address = () => {
   // userId= user?.id;
   // console.log(user,userId,'loged userrrr');
 
-  useEffect (() => {
-    fetchAddress();
-  },[user]);
-
-  const fetchAddress = () => {
+  
+  const fetchAddress = useCallback(() => {
     const id = user?.id
     axios.get(`api/listAddress/${id}`)
     .then((response) => {
@@ -41,8 +36,12 @@ const Address = () => {
     .catch((error) => {
       console.error("Error fetching addresses:", error);
     });
-  }
+  },[user?.id]);
 
+  useEffect (() => {
+    fetchAddress();
+  },[fetchAddress]);
+  
   const [showAddAddress, setShowAddAddress] = useState(false);
   const [newAddress, setNewAddress] = useState({
     user:user?.id,

@@ -1,9 +1,8 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useCallback} from 'react'
 import Navbar from '../Navbar/Navbar';
 import Swal from 'sweetalert2';
 import axios from '../../../utils/axios';
 // import Cookies from 'js-cookie';
-import {bookingWaste} from '../../../utils/constants'
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import Footer from '../Footer/Footer';
@@ -24,18 +23,12 @@ const WastePickup = () => {
   const {user} = useSelector((state) => state.user);
 
   
-
-  useEffect(() =>{
-    fetchaddAddress();
-    fetchWasteCategory();
-  },[user])
-
   useEffect(() => {
     console.log("uhuhs", wastePrice)
     // setWastePrice(wasteCat?.price)
-  },[wastetype])
+  },[wastetype, wastePrice])
 
-  const fetchaddAddress = () =>{
+  const fetchaddAddress = useCallback(() =>{
     const id = user?.id
     axios
     .get(`api/listAddress/${id}`)
@@ -55,8 +48,9 @@ const WastePickup = () => {
     .catch((error) => {
       console.log("Error fetching address", error);
     });
-  };
-  const fetchWasteCategory = () =>{
+  }, [user]);
+
+  const fetchWasteCategory = useCallback(() =>{
     axios
     .get('adminapi/biowastelist/')
     .then((response)=>{
@@ -71,9 +65,12 @@ const WastePickup = () => {
     .catch((error) => {
       console.error("Error fetching waste categories:", error);
     });
-  };
+  }, []);
 
-  
+  useEffect(() => {
+    fetchaddAddress();
+    fetchWasteCategory();
+  }, [fetchaddAddress, fetchWasteCategory]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -218,7 +215,7 @@ const WastePickup = () => {
                   onChange={(e) => {
                     setWasteType(e.target.value);
                     console.log(e.target.value, wasteCat)
-                    const selectedWaste = wasteCat.find((waste) => waste.id == e.target.value);
+                    const selectedWaste = wasteCat.find((waste) => waste.id === e.target.value);
                     console.log(selectedWaste)
                     if (selectedWaste) {
                       setWastePrice(selectedWaste.price);

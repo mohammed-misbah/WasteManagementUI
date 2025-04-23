@@ -3,7 +3,6 @@ import waste1 from '../images/waste 1.jpeg';
 import waste2 from '../images/waste 2.jpg';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
-import Card from './Card/Card';
 
 function Home() {
   const [currentImage, setCurrentImage] = useState(0);

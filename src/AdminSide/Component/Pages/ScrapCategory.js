@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../../utils/axios';
-import { baseUrl } from '../../../utils/constants';
 import { useNavigate } from 'react-router-dom';
 
 const ScrapCategory = () => {
   const [categories, setCategories] = useState([]);
-  const [showForm,setShowForm] = useState(false)
   const navigate = useNavigate();
   useEffect(() => {
     fetchCategories();
@@ -62,7 +60,7 @@ const ScrapCategory = () => {
             <td className="py-8 px-20">{/* Id content */}</td>
             <td className="py-8 px-20">
               {category.image && (
-                <img src={category.image} alt="image" className="w-16 h-16 object-cover rounded" />
+                <img src={category.image} alt="" className="w-16 h-16 object-cover rounded" />
               )}
             </td>
             <td className="py-8 px-20">{category.name}</td>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import axios from '../../../../utils/axios'
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,11 +11,7 @@ const ScrapPickupUpdate = () => {
     const [pickup_status, setStatus] = useState("");
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchScrapPickup();
-    }, []);
-
-    const fetchScrapPickup = () => {
+    const fetchScrapPickup = useCallback(() => {
         axios.get(`/api/scrapickup_update/${id}/`)
         .then((response) => {
             setPickup(response.data);
@@ -26,8 +22,12 @@ const ScrapPickupUpdate = () => {
         .catch((error) => {
             console.error('Error fetching order',error)
         });
-    };
+    }, [id]);
     console.log("Pickup deeeetails");
+
+    useEffect(() => {
+      fetchScrapPickup();
+  }, [fetchScrapPickup]);
 
 
     const updatePickup = () => {

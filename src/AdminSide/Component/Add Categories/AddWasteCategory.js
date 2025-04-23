@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 
 const AddWasteCategory = () => {
-    const [categories, setCategories] = useState([]);
+    const [setCategories] = useState([]);
     const [formData, setFormData] = useState({
       name: '',
       description: '',

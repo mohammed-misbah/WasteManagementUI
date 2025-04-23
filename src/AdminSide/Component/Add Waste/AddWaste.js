@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useSelector } from 'react-redux';
 
 const AddWaste = () => {
-    const [addwaste, setAddWaste] = useState([]);
+    const [ setAddWaste] = useState([]);
     const [wastetype, setWasteType] = useState('')
     const [wasteCat, setWasteCat] = useState([]);
     const [formData, setFormData] = useState({

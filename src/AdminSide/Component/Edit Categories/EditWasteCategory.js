@@ -1,7 +1,6 @@
-import React, { useEffect, useState} from 'react'
+import React, { useCallback, useEffect, useState} from 'react'
 import axios from '../../../utils/axios'
 import Swal from "sweetalert2";
-import { baseUrl } from "../../../utils/constants";
 import { useParams, useNavigate } from "react-router-dom";
 
 
@@ -13,23 +12,24 @@ const EditWasteCategory = () => {
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
+  const fetchWasteCategory = useCallback(() => {
+    axios.get(`/adminapi/wastecatedit/${id}/`)
+      .then((response) => {
+        setWasteCategory(response.data);
+        setName(response.data.name);
+        setDescription(response.data.description);
+        setImage(response.data.image);
+      })
+      .catch((error) => {
+        console.error("Error fetching Waste Category:", error);
+      });
+    console.log("fetch caaaaaategory", id);
+  }, [id]);
+  console.log("fetch caaaaaategory",id)
+
   useEffect(() => {
     fetchWasteCategory();
-  }, []);
-
-  const fetchWasteCategory = () => {
-    axios.get(`/adminapi/wastecatedit/${id}/`)
-    .then((response) => {
-      setWasteCategory(response.data);
-      setName(response.data.name);
-      setDescription(response.data.description);
-      setImage(response.data.image);
-    })
-    .catch((error) => {
-      console.error("Error fetching Waste Category:", error);
-    });
-  };
-  console.log("fetch caaaaaategory",id)
+  }, [fetchWasteCategory]);
 
   const updateWasteCategory = () => {
     const updatedWasteCategory = {
@@ -64,8 +64,8 @@ const EditWasteCategory = () => {
 
 
    const deleteWasteCategory = () => {
-    axios.
-      delete(`/adminapi/wastecatedit/${id}`)
+    axios
+      .delete(`/adminapi/wastecatedit/${id}`)
       .then((response) => {
         console.log("Waste category deleted Successfully");
         Swal.fire({

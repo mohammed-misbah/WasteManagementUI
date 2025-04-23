@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import axios from '../../../utils/axios'
 import Swal from "sweetalert2";
 import { useParams, useNavigate } from "react-router-dom";
@@ -14,11 +14,8 @@ const EditWaste = () => {
     const [category, setCategory] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchBioWaste();
-    }, [])
 
-    const fetchBioWaste = () => {
+    const fetchBioWaste = useCallback(() => {
         axios.get(`/adminapi/biowastedit/${id}/`)
         .then((response) => {
             setBioWaste(response.data);
@@ -33,8 +30,12 @@ const EditWaste = () => {
         .catch((error) => {
             console.error("Error fetching Biowaste",error)
         });
-    };
+    },[id]);
     console.log("fetch waaaaaaaste",id);
+
+    useEffect(() => {
+        fetchBioWaste();
+    }, [fetchBioWaste]);
 
     const updateBioWaste = () => {
         const updatedBioWaste = {

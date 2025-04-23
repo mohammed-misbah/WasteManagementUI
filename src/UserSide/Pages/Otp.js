@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import Navbar from '../Component/Navbar/Navbar';
 import Footer from '../Component/Footer/Footer';
-import {auth, provider} from '../../firebase';
+import {auth} from '../../firebase';
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from '../../utils/axios'
 import toast, { Toaster } from "react-hot-toast";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -13,7 +13,6 @@ import {setUserDetails} from '../../redux/usernameSlice'
 import {CgSpinner} from "react-icons/cg";
 
 const Otp = () => {
-    const [phone, setPhone] = useState('')
     const [otp, setOtp] = useState("");
     const [viewOtpForm, setViewOtpForm] = useState(false);
   

@@ -1,10 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 // import { FaTimes} from 'react-icons/fa';
 // import { MenuItem } from '@material-ui/core';
-import Address from '../Address';
 import {
   FaBars,
-  FaTh,
   FaUserAlt,
   FaShoppingBag,
   FaPowerOff,
@@ -21,12 +19,12 @@ import { motion } from 'framer-motion';
 // import Footer from './Footer/Footer';
 
 const Sidebar = ({ children }) => {
-  const [user, setUserState] = useState(0);
+  const [setUserState] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
-  const checkToken = () => {
+  const checkToken = useCallback(() => {
     const token = Cookies.get('jwt');
     if (!token) {
       console.log('no');
@@ -39,19 +37,20 @@ const Sidebar = ({ children }) => {
           }
         })
         .then((response) => {
-
-          // Cookies.remove('jwt');
-
-          console.log(response);
           setUserState(response.data.user);
           dispatch(setUserDetails(response.data.user));
+        })
+        .catch((error) => {
+          console.error("Token verification failed:", error);
+          Cookies.remove('jwt'); // Optional: clear invalid token
+          setUserState(null);
         });
     }
-  };
+  }, [setUserState, dispatch]);
 
   useEffect(() => {
     checkToken();
-  }, []);
+  }, [checkToken]);
 
   const handleLogout = () => {
     Cookies.remove('jwt');

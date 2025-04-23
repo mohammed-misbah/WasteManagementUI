@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useCallback} from 'react'
 import Navbar from '../Navbar/Navbar';
 import Swal from 'sweetalert2';
 import axios from '../../../utils/axios';
@@ -22,12 +22,8 @@ const ScrapBooking = () => {
   const {user} = useSelector((state) => state.user);
   console.log(user, "userrrrrrrrrr entered..!!!!!!");
 
-  useEffect(() =>{
-    fetchaddAddress();
-    fetchScrapCategory();
-  },[user])
-
-  const fetchaddAddress = () =>{
+  
+  const fetchaddAddress = useCallback(() =>{
     const id = user?.id
     axios
     .get(`api/listAddress/${id}`)
@@ -48,15 +44,15 @@ const ScrapBooking = () => {
     .catch((error) => {
       console.log("Error fetching address", error);
     });
-  };
-  console.log(addAddress,"Adddddressssssssssssss");
+  }, [user?.id]);
+  console.log(addAddress,"Newly added Address");
 
-  const fetchScrapCategory = () =>{
+  const fetchScrapCategory =  () =>{
     axios
     .get('adminapi/scrapwastelist/')
     .then((response)=>{
       console.log(response,"Scrap is arrrrrrrrrrrived");
-      const fetchScrap = response.data.map((scrap) =>({
+      const fetchScrap = response.data.map((scrap)  =>({
         id: scrap.id,
         name:scrap.name,
       }))
@@ -67,6 +63,11 @@ const ScrapBooking = () => {
     });
   };
   console.log(scrapCat,"scraaaaaaaaaaape");
+
+  useEffect(() =>{
+    fetchaddAddress();
+    fetchScrapCategory();
+  },[fetchaddAddress])
 
 
   const handleSubmit = (e) => {

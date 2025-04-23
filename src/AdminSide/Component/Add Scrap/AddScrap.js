@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useSelector } from 'react-redux';
 
 const AddScrap = () => {
-    const [addscrap, setAddScrap] = useState([]);
+    const [ setAddScrap] = useState([]);
     const [scraptype, setScrapType] = useState([]);
     const [scrapCat, setScrapCat] = useState([]);
     const [formData, setFormData] = useState({

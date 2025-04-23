@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import images from '../../images/urban-trash.jpg';
 import { FaBars, FaTimes, FaBell } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -6,10 +6,7 @@ import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const navRef = useRef();
   const { user } = useSelector((state) => state.user);
-  const [notifications, setNotifications] = useState([]);
-  const [notificationCount, setNotificationCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {

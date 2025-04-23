@@ -9,7 +9,6 @@ import {useDispatch} from "react-redux"
 import { loginPost } from '../../utils/constants';
 import {setUserDetails} from '../../redux/usernameSlice';
 import Navbar from '../Component/Navbar/Navbar';
-import { FaEnvelope, FaLock } from 'react-icons/fa';
 import Footer from '../Component/Footer/Footer';
 
 

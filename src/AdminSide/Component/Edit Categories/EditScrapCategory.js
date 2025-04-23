@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useCallback} from 'react'
 import axios from '../../../utils/axios'
 import Swal from "sweetalert2";
 import { useParams, useNavigate } from 'react-router-dom';
@@ -12,24 +12,24 @@ const EditScrapCategory = () => {
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
   
-  useEffect(() => {
-    fetchScrapCategory();
-  }, [])
-
-  const fetchScrapCategory = () => {
+  
+  const fetchScrapCategory = useCallback(() => {
     axios.get(`/adminapi/scrapcategoryedit/${id}`)
-    .then((response) => {
-      setScrapCategory(response.data);
-      setName(response.data.name);
-      setDescription(response.data.description);
-      setImage(response.data.image);
-    })
-    .catch((error) => {
-      console.error("Error fetching Waste Category:", error);
-    });
-  };
+      .then((response) => {
+        setScrapCategory(response.data);
+        setName(response.data.name);
+        setDescription(response.data.description);
+        setImage(response.data.image);
+      })
+      .catch((error) => {
+        console.error("Error fetching Waste Category:", error);
+      });
+  }, [id]);
   console.log("fetch caaaaaategory",id)
 
+  useEffect(() => {
+    fetchScrapCategory();
+  }, [fetchScrapCategory]);
 
 
   const updateScrapCategory = () => {

@@ -41,17 +41,15 @@ import ScrapPickupUpdate from './AdminSide/Component/Pages/PickupDetails/ScrapPi
 // import AdminComponent from './AdminComponent';
 import {useDispatch} from "react-redux"
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
 import axios from './utils/axios';
 import { setUserDetails } from './redux/usernameSlice';
 
 function App() {
-  const [user, setUserState] = useState(0);
+  const [ , setUserState] = useState(0);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   useEffect(() => {
     // const jwt = localStorage.getItem('jwt_user')
-    
     const token = Cookies.get("jwt") ?? Cookies.get("jwt_token");
     if (!token) {
 
@@ -68,7 +66,7 @@ function App() {
           dispatch(setUserDetails(response.data.user));
         }).catch((err) => {console.log(err)});
     }
-  },[]);
+  },[dispatch]);
   
   return (
       <Routes>

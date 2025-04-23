@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 const User = () => {
   const [users, setUsers] = useState([])
-  const [block, setBlock] = useState(false);
+  const [ setBlock] = useState(false);
   
   useEffect(() => {
     axios
